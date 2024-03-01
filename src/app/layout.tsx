@@ -14,9 +14,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const classes = `antialiased text-gray-900 bg-white dark:bg-gray-900 dark:text-white ${inter.className}`;
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={classes}>{children}</body>
     </html>
   );
 }
