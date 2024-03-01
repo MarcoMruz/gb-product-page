@@ -1,6 +1,6 @@
-import { ForwardedRef, forwardRef, HTMLAttributes, useEffect } from 'react';
-import { config } from './modal.config';
-import { ModalProvider } from '../../../hooks/use-modal-props';
+import { ForwardedRef, forwardRef, HTMLAttributes, useEffect } from "react";
+import { config } from "./modal.config";
+import { ModalProvider } from "../../../hooks/use-modal-props";
 
 export type ModalProps = {
   isOpen: boolean;
@@ -17,28 +17,28 @@ export const Modal = forwardRef(
       children,
       isOpen,
       onClose,
-      position = 'top',
-      size = 'md',
+      position = "top",
+      size = "md",
       closeOnOverlayClick = true,
       ...divProps
     }: ModalProps,
-    ref: ForwardedRef<HTMLDivElement>
+    ref: ForwardedRef<HTMLDivElement>,
   ) => {
     useEffect(() => {
       const handleCloseClick = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
+        if (e.key === "Escape") {
           onClose();
         }
       };
 
-      window.addEventListener('keydown', handleCloseClick);
+      window.addEventListener("keydown", handleCloseClick);
 
       return () => {
-        window.removeEventListener('keydown', handleCloseClick);
+        window.removeEventListener("keydown", handleCloseClick);
       };
     }, [closeOnOverlayClick, onClose]);
 
-    const classes = isOpen ? config.position[position] : 'hidden';
+    const classes = isOpen ? config.position[position] : "hidden";
 
     const layout = (
       <ModalProvider
@@ -53,5 +53,7 @@ export const Modal = forwardRef(
     );
 
     return layout;
-  }
+  },
 );
+
+Modal.displayName = "Modal";
