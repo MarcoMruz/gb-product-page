@@ -71,14 +71,14 @@ const PageInfoMeta = t.type({
   to: t.number,
   total: t.number,
   per_page: t.number,
-  next_url: t.string,
-  next_page: t.number,
+  next_url: t.union([t.string, t.null]),
+  next_page: t.union([t.number, t.null]),
 });
 
 export type PageInfoMeta = t.TypeOf<typeof PageInfoMeta>;
 
 export const SportNutritionListResponse = t.type({
-  items: t.array(SportNutrition),
+  items: optional(t.array(SportNutrition)),
   meta: PageInfoMeta,
   filters: t.array(SportNutritionFilter),
 });

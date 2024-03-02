@@ -1,7 +1,7 @@
 "use client";
 
 import { SportNutritionFilter } from "@/types/models";
-import { FC, Fragment, useCallback, useEffect, useState } from "react";
+import { FC, Fragment, useCallback, useState } from "react";
 import { VStack } from "../v-stack";
 import { FilterMultiSelect } from "./filter-label";
 import { makeApiSearchQueryFromFilters, omitNullValue } from "@/utils/utils";
@@ -11,7 +11,6 @@ import Button from "../button";
 import { Spacer } from "../spacer";
 import { useFilters } from "@/hooks/use-filters";
 import { handleOnMultiSelectClick } from "@/utils/sport-nutrition.utils";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 type Props = {
@@ -21,11 +20,9 @@ type Props = {
 
 const FilterList: FC<Props> = ({ filters, className }) => {
   const stateAndActions = useFilters();
-  const searchParams = useSearchParams();
   const [canShowFilters, setCanShowFilters] = useState(false);
 
   const handleOnApplyFiltersClick = useCallback(() => {
-    console.log(makeApiSearchQueryFromFilters(filters, stateAndActions));
     return makeApiSearchQueryFromFilters(filters, stateAndActions);
   }, [stateAndActions, filters]);
 

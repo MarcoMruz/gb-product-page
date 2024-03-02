@@ -55,26 +55,21 @@ export function makeApiSearchQueryFromFilters(
   filters: SportNutritionFilter[],
   filtersState: SportNutritionState,
 ): string {
-  console.log(filters, filtersState);
   const query = filters.reduce((acc, filter) => {
     // @ts-ignore
     const value = filtersState[filter.code];
-
-    console.log(value);
 
     if (typeof value === "boolean" || typeof value === "number") {
       return acc;
     }
 
-    console.log("value", value);
-
     const params = new URLSearchParams();
 
     value.forEach((val: string) => {
-      params.append(`${filter.code}[]`, val);
+      params.append(`${filter.code}`, val);
     });
 
-    return `${acc}&${params.toString()}`;
+    return `${acc}&${params}`;
   }, "");
 
   return query;
