@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { tagConfig } from "./config";
 import { classNames } from "@/utils/utils";
@@ -6,11 +8,10 @@ import { FCWithChildren } from "@/types/common";
 type Props = {
   className?: string;
   title?: string;
-  size?: keyof typeof tagConfig.size;
   color?: keyof typeof tagConfig.colorScheme;
   label?: string;
-  variant?: keyof typeof tagConfig.variant;
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  isSelected?: boolean;
 };
 
 export const Tag: FCWithChildren<Props> = ({
@@ -18,18 +19,20 @@ export const Tag: FCWithChildren<Props> = ({
   className = "",
   label,
   title,
-  size = "md",
-  color = "neutral",
-  variant = "solid",
+  color = "gray",
   onClick,
+  isSelected = false,
 }) => {
-  const classnames = classNames(
-    `badge`,
-    tagConfig.size[size],
-    tagConfig.colorScheme[color],
-    tagConfig.variant[variant],
-    className,
-  );
+  const classnames = classNames(tagConfig.colorScheme[color], className);
+
+  if (isSelected) {
+    const classes = classNames(tagConfig.colorScheme["green"], className);
+    return (
+      <div title={title} className={classes} onClick={onClick}>
+        {label ? label : children}
+      </div>
+    );
+  }
 
   return (
     <div title={title} className={classnames} onClick={onClick}>

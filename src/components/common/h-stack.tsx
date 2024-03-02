@@ -10,7 +10,7 @@ type Props = {
   shadow?: keyof typeof config.shadow;
   justify?: keyof typeof hstackConfig.justify;
   align?: keyof typeof hstackConfig.align;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export const HStack: FCWithChildren<Props> = ({
   children,
@@ -20,6 +20,7 @@ export const HStack: FCWithChildren<Props> = ({
   shadow = "none",
   justify = "start",
   align = "center",
+  ...rest
 }) => {
   const classnames = classNames(
     `flex flex-row`,
@@ -31,5 +32,9 @@ export const HStack: FCWithChildren<Props> = ({
     config.shadow[shadow],
   );
 
-  return <div className={classnames}>{children}</div>;
+  return (
+    <div className={classnames} {...rest}>
+      {children}
+    </div>
+  );
 };

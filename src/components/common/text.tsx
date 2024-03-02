@@ -1,5 +1,5 @@
 import { classNames } from "@/utils/utils";
-import { config, textConfig } from "./config";
+import { textConfig } from "./config";
 
 type Props = {
   children?: React.ReactNode;

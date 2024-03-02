@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["gymbeam.sk"],
+    remotePatterns: [
+      {
+        hostname: "gymbeam.sk",
+        protocol: "https",
+      },
+    ],
   },
 };
 

@@ -145,36 +145,6 @@ export const textConfig = {
   },
 };
 
-export const buttonConfig = {
-  size: {
-    xs: "btn-xs",
-    sm: "btn-sm",
-    md: "btn-md",
-    lg: "btn-lg",
-  },
-  colorScheme: {
-    primary: "btn-primary",
-    secondary: "btn-secondary",
-    success: "btn-success",
-    danger: "btn-error",
-    warning: "btn-warning",
-    ghost: "btn-ghost",
-    link: "btn-link",
-    outline: "btn-outline",
-    active: "btn-active",
-    accent: "btn-accent",
-    info: "btn-info",
-    neutral: "",
-  },
-  variant: {
-    wide: "btn-wide",
-    block: "btn-block",
-    circle: "btn-circle",
-    square: "btn-square",
-    none: "",
-  },
-};
-
 export const inputConfig = {
   inputSize: {
     xs: "input-xs",
@@ -211,22 +181,19 @@ export const checkboxConfig = {
 };
 
 export const tagConfig = {
-  size: {
-    xs: "badge-xs",
-    sm: "badge-sm",
-    md: "badge-md",
-    lg: "badge-lg",
-  },
   colorScheme: {
-    primary: "badge-primary",
-    secondary: "badge-secondary",
-    accent: "badge-accent",
-    neutral: "",
-    ghost: "badge-ghost",
-  },
-  variant: {
-    outline: "badge-outline",
-    solid: "",
+    gray: "inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10",
+    red: "inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10",
+    yellow:
+      "inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20",
+    green:
+      "inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20",
+    blue: "inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10",
+    indigo:
+      "inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10",
+    purple:
+      "inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10",
+    pink: "inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10",
   },
 };
 
@@ -254,5 +221,27 @@ export const avatarConfig = {
     hexagon: "mask mask-hexagon",
     triangle: "mask mask-triangle",
     none: "",
+  },
+};
+
+export const gridConfig = {
+  cols: {
+    1: "grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1",
+    2: "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2",
+    3: "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3",
+    4: "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+  },
+  gap: {
+    0: "gap-0",
+    1: "gap-1",
+    2: "gap-2",
+    3: "gap-3",
+    4: "gap-4",
+    5: "gap-5",
+    6: "gap-6",
+    7: "gap-7",
+    8: "gap-8",
+    9: "gap-9",
+    10: "gap-10",
   },
 };

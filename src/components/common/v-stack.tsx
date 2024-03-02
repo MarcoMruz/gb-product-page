@@ -9,7 +9,7 @@ type Props = {
   shadow?: keyof typeof config.shadow;
   justify?: keyof typeof vstackConfig.justify;
   align?: keyof typeof vstackConfig.align;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export const VStack: FCWithChildren<Props> = ({
   children,
@@ -19,6 +19,7 @@ export const VStack: FCWithChildren<Props> = ({
   shadow = "none",
   justify = "start",
   align = "start",
+  ...rest
 }) => {
   const classnames = classNames(
     `flex flex-col`,
@@ -29,5 +30,9 @@ export const VStack: FCWithChildren<Props> = ({
     config.rounded[rounded],
     config.shadow[shadow],
   );
-  return <div className={classnames}>{children}</div>;
+  return (
+    <div className={classnames} {...rest}>
+      {children}
+    </div>
+  );
 };
