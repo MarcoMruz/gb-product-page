@@ -56,7 +56,7 @@ export default async function SportsNutrition({
       <Container>
         <Breadcrumb items={["Sports nutrition"]} />
         <FilterList filters={filters} />
-        <SportNutritionList products={products} />
+        <SportNutritionList products={products ?? []} />
       </Container>
     </Suspense>
   );
