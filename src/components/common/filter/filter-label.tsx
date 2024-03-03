@@ -3,11 +3,13 @@ import { Tag } from "../tag";
 import { HStack } from "../h-stack";
 import { Input } from "../input";
 import { Spacer } from "../spacer";
+import { omitNullValue } from "@/utils/utils";
 
 type MultiSelectProps = {
   labels: [string, string][];
   selectedFilters: string[];
   onClick: (value: string) => void;
+  showAll?: boolean;
 };
 
 type RangeProps = {
@@ -27,19 +29,33 @@ const FilterMultiSelect: FC<MultiSelectProps> = ({
   labels,
   selectedFilters,
   onClick,
+  showAll = false,
 }) => {
   return (
     <div>
-      {labels.map((label) => (
-        <Tag
-          key={label[0]}
-          isSelected={selectedFilters.includes(label[0])}
-          onClick={() => onClick(label[0])}
-          className="mx-2 cursor-pointer"
-        >
-          {label[1]}
-        </Tag>
-      ))}
+      {labels
+        .slice(0, showAll ? labels.length : 5)
+        .concat(
+          labels
+            .map((label): [string, string] | null => {
+              if (selectedFilters.includes(label[0]) && !showAll) {
+                return [label[0], label[1]];
+              }
+
+              return null;
+            })
+            .filter(omitNullValue),
+        )
+        .map((label) => (
+          <Tag
+            key={label[0]}
+            isSelected={selectedFilters.includes(label[0])}
+            onClick={() => onClick(label[0])}
+            className="mx-2 cursor-pointer"
+          >
+            {label[1]}
+          </Tag>
+        ))}
     </div>
   );
 };
