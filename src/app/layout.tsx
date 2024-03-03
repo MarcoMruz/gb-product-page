@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Menu from "@/components/menu";
-import { FilterProvider } from "@/hooks/use-filters";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={classes}>
         <Menu />
-        <FilterProvider>{children}</FilterProvider>
+        {children}
       </body>
     </html>
   );

@@ -5,6 +5,8 @@ import { Container } from "@/components/common/container";
 import Breadcrumb from "@/components/common/breadcrumb";
 import SportNutritionList from "@/components/sports-nutrition/list";
 import FilterList from "@/components/common/filter/filter-list";
+import { FilterProvider } from "@/hooks/use-filters";
+import { convertSearchParamsToFilters } from "@/utils/utils";
 
 async function loadProducts(searchParams: Record<string, any>) {
   const apiUrl = Object.keys(searchParams).reduce((acc, key) => {
@@ -48,15 +50,20 @@ export default async function SportsNutrition({
   searchParams: Record<string, any>;
 }) {
   const response = await loadProducts(searchParams);
-
   const { items: products, filters } = response;
 
   return (
     <Suspense fallback={<Loading />}>
       <Container>
-        <Breadcrumb items={["Sports nutrition"]} />
-        <FilterList filters={filters} />
-        <SportNutritionList products={products ?? []} />
+        <FilterProvider
+          values={{
+            ...convertSearchParamsToFilters(new URLSearchParams(searchParams)),
+          }}
+        >
+          <Breadcrumb items={["Sports nutrition"]} />
+          <FilterList filters={filters} />
+          <SportNutritionList products={products ?? []} />
+        </FilterProvider>
       </Container>
     </Suspense>
   );

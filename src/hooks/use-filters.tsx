@@ -1,5 +1,6 @@
 "use client";
 
+import { INITIAL_FILTERS } from "@/utils/utils";
 import { createContext, useContext, useRef } from "react";
 import { useStore } from "zustand";
 import { createStore } from "zustand";
@@ -32,34 +33,6 @@ export type SportNutritionState = {
   price: number;
 };
 
-const INITIAL_VALUES: SportNutritionState = {
-  default_category: [],
-  tea_package: [],
-  manufacturer: [],
-  flavor: [],
-  mass_grams_g: [],
-  mass_mililiter_ml: [],
-  tablets: [],
-  colors: [],
-  capsules: [],
-  form: [],
-  blend: [],
-  vegetarian: false,
-  vegan: false,
-  glutenfree: false,
-  lactosefree: false,
-  bio: false,
-  method_of_protein_processing: [],
-  protein_sourcee: [],
-  gmo_free: false,
-  artificial_sweetener_free: false,
-  plastic_packaging_free: false,
-  aspartame_free: false,
-  legal_category_of_product: [],
-  product_labels: [],
-  price: 0,
-};
-
 export type SportNutritionActions = {
   setMainCategory: (mainCategory: string) => void;
   setPackagingTeas: (packagingTeas: string) => void;
@@ -89,7 +62,7 @@ export type SportNutritionActions = {
   clearFilters: () => void;
 };
 
-const createFilterStore = (init: SportNutritionState = INITIAL_VALUES) =>
+const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
   createStore<SportNutritionState & SportNutritionActions>((set) => ({
     ...init,
     setMainCategory: (default_category) =>
@@ -330,7 +303,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_VALUES) =>
     setPrice: (price) => set({ price }),
     setVegan: (vegan) => set({ vegan }),
     setVegetarian: (vegetarian) => set({ vegetarian }),
-    clearFilters: () => set({ ...INITIAL_VALUES }),
+    clearFilters: () => set({ ...INITIAL_FILTERS }),
   }));
 
 type FilterStore = ReturnType<typeof createFilterStore>;

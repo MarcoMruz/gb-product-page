@@ -5,6 +5,34 @@ import { PathReporter } from "io-ts/lib/PathReporter";
 import { SportNutritionFilter } from "@/types/models";
 import { SportNutritionState } from "@/hooks/use-filters";
 
+export const INITIAL_FILTERS: SportNutritionState = {
+  default_category: [],
+  tea_package: [],
+  manufacturer: [],
+  flavor: [],
+  mass_grams_g: [],
+  mass_mililiter_ml: [],
+  tablets: [],
+  colors: [],
+  capsules: [],
+  form: [],
+  blend: [],
+  vegetarian: false,
+  vegan: false,
+  glutenfree: false,
+  lactosefree: false,
+  bio: false,
+  method_of_protein_processing: [],
+  protein_sourcee: [],
+  gmo_free: false,
+  artificial_sweetener_free: false,
+  plastic_packaging_free: false,
+  aspartame_free: false,
+  legal_category_of_product: [],
+  product_labels: [],
+  price: 0,
+};
+
 export function classNames(...classes: (string | undefined)[]): string {
   return classes.filter(Boolean).join(" ");
 }
@@ -59,7 +87,15 @@ export function makeApiSearchQueryFromFilters(
     // @ts-ignore
     const value = filtersState[filter.code];
 
+    if (!value) {
+      return acc;
+    }
+
     if (typeof value === "boolean" || typeof value === "number") {
+      return acc;
+    }
+
+    if (value.length === 0) {
       return acc;
     }
 
@@ -73,4 +109,31 @@ export function makeApiSearchQueryFromFilters(
   }, "");
 
   return query;
+}
+
+export function convertSearchParamsToFilters(
+  params: URLSearchParams,
+): SportNutritionState {
+  const paramsObj: any = {
+    ...INITIAL_FILTERS,
+    ...Object.fromEntries(params.entries()),
+  };
+
+  return Object.keys(paramsObj).reduce((acc, key) => {
+    if (Array.isArray(paramsObj[key])) {
+      return {
+        ...acc,
+        [key]: paramsObj[key],
+      };
+    }
+
+    if (typeof paramsObj[key] === "string") {
+      return {
+        ...acc,
+        [key]: [paramsObj[key]],
+      };
+    }
+
+    return acc;
+  }, {} as SportNutritionState);
 }
