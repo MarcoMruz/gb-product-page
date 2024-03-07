@@ -46,8 +46,13 @@ const FilterList: FC<Props> = memo(({ filters, className }) => {
       })
       .filter(omitNullValue);
 
+  const filtersWithoutUnsupportedOnes = filters.filter(
+    (filter) => filter.code !== "price"
+  );
   const selectedFilter =
-    filters.find((filter) => filter.code === selectedFilterLabel) ?? null;
+    filtersWithoutUnsupportedOnes.find(
+      (filter) => filter.code === selectedFilterLabel
+    ) ?? null;
 
   return (
     <>
@@ -65,35 +70,42 @@ const FilterList: FC<Props> = memo(({ filters, className }) => {
       )}
       {canShowFilters && (
         <VStack spacing={2} className={className}>
-          {filters.map((filter) => (
-            <Fragment key={filter.code}>
-              {filter.type === "multiselect" && (
-                <HStack spacing={5}>
-                  <Text
-                    title="see all filters"
-                    className="cursor-pointer"
-                    onClick={() => {
-                      setSelectedFilterLabel(filter.code);
-                      open();
-                    }}
-                  >
-                    {filter.name}
-                  </Text>
-                  <FilterMultiSelect
-                    labels={multiselectOptions(filter)}
-                    selectedFilters={
-                      isKeyOfSportNutritionState(filter.code)
-                        ? state[filter.code]
-                        : []
-                    }
-                    onClick={(value) => {
-                      handleOnMultiSelectClick(filter, actions, value);
-                    }}
-                  />
-                </HStack>
-              )}
-            </Fragment>
-          ))}
+          {filtersWithoutUnsupportedOnes.length === 0 && (
+            <Text color="gray">
+              Please clear your current filters if you want to see other ones
+              and search for different products
+            </Text>
+          )}
+          {filtersWithoutUnsupportedOnes.length > 0 &&
+            filtersWithoutUnsupportedOnes.map((filter) => (
+              <Fragment key={filter.code}>
+                {filter.type === "multiselect" && (
+                  <HStack spacing={5}>
+                    <Text
+                      title="see all filters"
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setSelectedFilterLabel(filter.code);
+                        open();
+                      }}
+                    >
+                      {filter.name}
+                    </Text>
+                    <FilterMultiSelect
+                      labels={multiselectOptions(filter)}
+                      selectedFilters={
+                        isKeyOfSportNutritionState(filter.code)
+                          ? state[filter.code]
+                          : []
+                      }
+                      onClick={(value) => {
+                        handleOnMultiSelectClick(filter, actions, value);
+                      }}
+                    />
+                  </HStack>
+                )}
+              </Fragment>
+            ))}
         </VStack>
       )}
 
