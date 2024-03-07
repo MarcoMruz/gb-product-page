@@ -46,6 +46,12 @@ npm run build
 
 This command will generate a production-ready build of the project, optimized for performance and ready for deployment.
 
+## Next.js meta-framework
+
+In this project, we leverage Next.js version 14, a powerful meta-framework built on React. Next.js simplifies server-rendered React applications, offering features like SSR, SSG, automatic code splitting, file-based routing, and API routes. While it has a learning curve and may introduce complexity, Next.js excels in performance and developer experience, making it an ideal choice for modern web applications.
+
+For our usage we will mainly take an advantage of SSR since it will help us to improve our SEO and from the performance perspective it will move logic to the server and not to handle it on client's device. We aimed our eyes on this framework because it is based on React and it will help us more easily to find new developers since it has strong representation between developers at current state of workforce market.
+
 ## Global State Management: Zustand
 
 This project utilizes Zustand for global state management. Zustand is a small, fast, and reactive state management library for React applications. It provides a simple and efficient way to manage application state, making it easier to share state across components.
