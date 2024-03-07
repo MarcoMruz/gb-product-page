@@ -24,15 +24,7 @@ export default function Error({
           <Heading className="text-center">
             We had a problem to load products for you. Please try again later.
           </Heading>
-          <Button
-            onClick={
-              // Attempt to recover by trying to re-render the invoices route
-              () => reset()
-            }
-            colorScheme="danger"
-          >
-            Try again
-          </Button>
+          <Button onClick={() => reset()}>Try again</Button>
         </VStack>
       </Center>
     </main>

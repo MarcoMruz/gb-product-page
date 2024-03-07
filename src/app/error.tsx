@@ -21,20 +21,12 @@ export default function Error({
     <main>
       <Center>
         <VStack align="center" spacing={5}>
-          <Heading className="text-center">
+          <Heading className="text-center" color="black">
             There was some error, that we did not anticipate. Please leave us a
             feedback so that we can improve in providing you with the best
             service.
           </Heading>
-          <Button
-            onClick={
-              // Attempt to recover by trying to re-render the invoices route
-              () => reset()
-            }
-            colorScheme="danger"
-          >
-            Try again
-          </Button>
+          <Button onClick={() => reset()}>Try again please</Button>
         </VStack>
       </Center>
     </main>
