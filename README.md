@@ -4,7 +4,7 @@ This README will guide you through the installation process, setting up the deve
 
 ## Installation
 
-To get started, make sure you have Node.js installed on your machine. The project requires Node.js version 18.0.0 or later.
+To get started, make sure you have Node.js installed on your machine. The project requires Node.js version 18.17.0 or later.
 
 1. Clone the repository to your local machine:
 
