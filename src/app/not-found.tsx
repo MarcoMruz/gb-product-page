@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Text } from "@/components/common/text";
-import { Heading } from "@/components/common/heading";
+import Text from "@/components/common/text";
+import Heading from "@/components/common/heading";
 import Center from "@/components/common/center";
-import { VStack } from "@/components/common/v-stack";
+import VStack from "@/components/common/v-stack";
 
 export default function NotFound() {
   return (

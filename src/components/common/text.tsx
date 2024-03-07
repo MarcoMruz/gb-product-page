@@ -10,7 +10,7 @@ type Props = {
   align?: keyof typeof textConfig.align;
 } & React.HTMLAttributes<HTMLParagraphElement>;
 
-export const Text = ({
+const Text = ({
   children,
   className = "",
   size = "base",
@@ -24,7 +24,7 @@ export const Text = ({
     textConfig.weight[weight],
     textConfig.color[color],
     textConfig.align[align],
-    className,
+    className
   );
   return (
     <p className={classnames} {...props}>
@@ -32,3 +32,5 @@ export const Text = ({
     </p>
   );
 };
+
+export default Text;

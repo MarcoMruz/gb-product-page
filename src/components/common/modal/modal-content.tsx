@@ -1,7 +1,7 @@
 import React from "react";
-import { HStack } from "../h-stack";
-import { Spacer } from "../spacer";
-import { VStack } from "../v-stack";
+import HStack from "../h-stack";
+import Spacer from "../spacer";
+import VStack from "../v-stack";
 import { config } from "./modal.config";
 import { useModalProps } from "../../../hooks/use-modal-props";
 import { FCWithChildren } from "@/types/common";

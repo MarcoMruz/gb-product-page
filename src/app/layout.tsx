@@ -15,7 +15,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const classes = `antialiased text-gray-900 bg-white dark:bg-gray-900 dark:text-white ${inter.className}`;
+  const classes = `antialiased text-gray-900 bg-white dark:bg-white dark:text-black ${inter.className}`;
 
   return (
     <html lang="en">

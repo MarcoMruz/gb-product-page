@@ -12,7 +12,7 @@ type Props = {
   align?: keyof typeof hstackConfig.align;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export const HStack: FCWithChildren<Props> = ({
+const HStack: FCWithChildren<Props> = ({
   children,
   className = "",
   spacing = 0,
@@ -29,7 +29,7 @@ export const HStack: FCWithChildren<Props> = ({
     hstackConfig.justify[justify],
     hstackConfig.align[align],
     config.rounded[rounded],
-    config.shadow[shadow],
+    config.shadow[shadow]
   );
 
   return (
@@ -38,3 +38,5 @@ export const HStack: FCWithChildren<Props> = ({
     </div>
   );
 };
+
+export default HStack;

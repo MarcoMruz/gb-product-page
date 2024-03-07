@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 type Props = {
   items: string[];
 };
 
-const Breadcrumb: FC<Props> = ({ items }) => {
+const Breadcrumb: FC<Props> = memo(({ items }) => {
   const lastItem = items[items.length - 1];
   const otherItems = items.slice(0, items.length - 1);
 
@@ -28,6 +28,7 @@ const Breadcrumb: FC<Props> = ({ items }) => {
       </div>
     </nav>
   );
-};
+});
 
+Breadcrumb.displayName = "Breadcrumb";
 export default Breadcrumb;

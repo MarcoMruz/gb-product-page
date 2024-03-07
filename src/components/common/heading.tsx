@@ -10,7 +10,7 @@ type Props = {
   align?: keyof typeof textConfig.align;
 } & React.HTMLAttributes<HTMLHeadingElement>;
 
-export const Heading: FCWithChildren<Props> = ({
+const Heading: FCWithChildren<Props> = ({
   children,
   className = "",
   size = "xl",
@@ -24,7 +24,7 @@ export const Heading: FCWithChildren<Props> = ({
     textConfig.weight[weight],
     textConfig.color[color],
     textConfig.align[align],
-    className,
+    className
   );
 
   return (
@@ -33,3 +33,5 @@ export const Heading: FCWithChildren<Props> = ({
     </h1>
   );
 };
+
+export default Heading;

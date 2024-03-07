@@ -1,7 +1,7 @@
 import { makeStarsFromPercentage } from "@/utils/utils";
 import { FC } from "react";
-import { HStack } from "./h-stack";
-import { Text } from "./text";
+import HStack from "./h-stack";
+import Text from "./text";
 import { textConfig } from "./config";
 
 type Props = {

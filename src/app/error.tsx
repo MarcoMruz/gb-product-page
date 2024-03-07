@@ -2,8 +2,8 @@
 
 import Button from "@/components/common/button";
 import Center from "@/components/common/center";
-import { Heading } from "@/components/common/heading";
-import { VStack } from "@/components/common/v-stack";
+import Heading from "@/components/common/heading";
+import VStack from "@/components/common/v-stack";
 import { useEffect } from "react";
 
 export default function Error({

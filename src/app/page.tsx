@@ -1,5 +1,5 @@
 import Center from "@/components/common/center";
-import { Heading } from "@/components/common/heading";
+import Heading from "@/components/common/heading";
 
 export default function Home() {
   return (

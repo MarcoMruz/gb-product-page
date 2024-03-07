@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { HStack } from "./common/h-stack";
+import { FC, memo } from "react";
+import HStack from "./common/h-stack";
 import Link from "next/link";
 import Logo from "./common/logo";
-import { Container } from "./common/container";
+import Container from "./common/container";
 
-const Menu: FC = () => {
+const Menu: FC = memo(() => {
   return (
     <Container>
       <HStack spacing={2} className="my-5" justify="between">
@@ -18,6 +18,7 @@ const Menu: FC = () => {
       </HStack>
     </Container>
   );
-};
+});
 
+Menu.displayName = "Menu";
 export default Menu;

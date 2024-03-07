@@ -11,7 +11,7 @@ type Props = {
   align?: keyof typeof vstackConfig.align;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export const VStack: FCWithChildren<Props> = ({
+const VStack: FCWithChildren<Props> = ({
   children,
   className = "",
   spacing = 0,
@@ -28,7 +28,7 @@ export const VStack: FCWithChildren<Props> = ({
     vstackConfig.justify[justify],
     vstackConfig.align[align],
     config.rounded[rounded],
-    config.shadow[shadow],
+    config.shadow[shadow]
   );
   return (
     <div className={classnames} {...rest}>
@@ -36,3 +36,5 @@ export const VStack: FCWithChildren<Props> = ({
     </div>
   );
 };
+
+export default VStack;

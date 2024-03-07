@@ -3,7 +3,7 @@ import { FC } from "react";
 import Grid from "../common/grid/grid";
 import GridItem from "../common/grid/grid-item";
 import SportNutritionThumbnail from "./thumbnail";
-import { Heading } from "../common/heading";
+import Heading from "../common/heading";
 import Center from "../common/center";
 
 type Props = {

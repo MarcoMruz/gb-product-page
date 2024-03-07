@@ -57,6 +57,8 @@ export function makeApiSearchQueryFromFilters(
   filtersState: SportNutritionState
 ): string {
   const query = filters.reduce((acc, filter) => {
+    // this ts-ignore rule is helping us to be able dynamically access the stateAndActions object based on selected filter that is used as a key
+    // we are using same naming convention for the stateAndActions object keys and filter codes that are returned from the server
     // @ts-ignore
     const value = filtersState[filter.code];
 
@@ -109,3 +111,26 @@ export function convertSearchParamsToFilters(
     return acc;
   }, {} as SportNutritionState);
 }
+
+export const formatSearchParamsToUrlString = (
+  searchParams: Record<string, string | string[]>
+) => {
+  return Object.keys(searchParams).reduce((acc, key) => {
+    const searchParam = searchParams[key];
+    const issearchParamArray = Array.isArray(searchParam);
+
+    if (issearchParamArray && searchParam.length > 1) {
+      return searchParam
+        .map((value: any) => {
+          return `${acc}&${key}[]=${value}`;
+        })
+        .join("");
+    }
+
+    if (issearchParamArray && searchParam.length === 1) {
+      return `${acc}&${key}[]=${searchParam[0]}`;
+    }
+
+    return `${acc}&${key}[]=${searchParam}`;
+  }, "");
+};
