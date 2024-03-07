@@ -10,7 +10,10 @@ import Text from "../text";
 import Button from "../button";
 import Spacer from "../spacer";
 import { useFilters } from "@/hooks/use-filters";
-import { handleOnMultiSelectClick } from "@/utils/sport-nutrition.utils";
+import {
+  handleOnMultiSelectClick,
+  isKeyOfSportNutritionState,
+} from "@/utils/sport-nutrition.utils";
 import Link from "next/link";
 import { useDisclosure } from "@/hooks";
 import FilterListModal from "./filter-list-modal";
@@ -21,7 +24,7 @@ type Props = {
 };
 
 const FilterList: FC<Props> = memo(({ filters, className }) => {
-  const stateAndActions = useFilters();
+  const { state, actions } = useFilters();
   const [canShowFilters, setCanShowFilters] = useState(false);
   const { close, isOpen, open } = useDisclosure();
   const [selectedFilterLabel, setSelectedFilterLabel] = useState<string | null>(
@@ -29,8 +32,8 @@ const FilterList: FC<Props> = memo(({ filters, className }) => {
   );
 
   const handleOnApplyFiltersClick = useCallback(() => {
-    return makeApiSearchQueryFromFilters(filters, stateAndActions);
-  }, [stateAndActions, filters]);
+    return makeApiSearchQueryFromFilters(filters, state);
+  }, [state, filters]);
 
   const multiselectOptions = (filter: SportNutritionFilter) =>
     filter!
@@ -53,9 +56,10 @@ const FilterList: FC<Props> = memo(({ filters, className }) => {
           isOpen={isOpen}
           onClose={close}
           selectedFilter={selectedFilter}
+          selectedFilters={state}
           onApplyFiltersClick={handleOnApplyFiltersClick}
           onFilterLabelClick={(value) =>
-            handleOnMultiSelectClick(selectedFilter, stateAndActions, value)
+            handleOnMultiSelectClick(selectedFilter, actions, value)
           }
         />
       )}
@@ -78,13 +82,12 @@ const FilterList: FC<Props> = memo(({ filters, className }) => {
                   <FilterMultiSelect
                     labels={multiselectOptions(filter)}
                     selectedFilters={
-                      // this ts-ignore rule is helping us to be able dynamically access the stateAndActions object based on selected filter that is used as a key
-                      // we are using same naming convention for the stateAndActions object keys and filter codes that are returned from the server
-                      // @ts-ignore
-                      stateAndActions[filter.code]
+                      isKeyOfSportNutritionState(filter.code)
+                        ? state[filter.code]
+                        : []
                     }
                     onClick={(value) => {
-                      handleOnMultiSelectClick(filter, stateAndActions, value);
+                      handleOnMultiSelectClick(filter, actions, value);
                     }}
                   />
                 </HStack>
@@ -108,7 +111,7 @@ const FilterList: FC<Props> = memo(({ filters, className }) => {
         </Button>
         <Button
           onClick={() => {
-            stateAndActions.clearFilters();
+            actions.clearFilters();
           }}
           className="bg-gray-200 border border-gray-500 text-gray-500 rounded-md hover:bg-gray-300 hover:border-gray-600 hover:text-gray-600 my-5"
         >

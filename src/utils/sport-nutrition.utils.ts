@@ -20,20 +20,10 @@ export const INITIAL_FILTERS: SportNutritionState = {
   capsules: [],
   form: [],
   blend: [],
-  vegetarian: false,
-  vegan: false,
-  glutenfree: false,
-  lactosefree: false,
-  bio: false,
   method_of_protein_processing: [],
   protein_sourcee: [],
-  gmo_free: false,
-  artificial_sweetener_free: false,
-  plastic_packaging_free: false,
-  aspartame_free: false,
   legal_category_of_product: [],
   product_labels: [],
-  price: 0,
 };
 
 export function decodeSportNutritionListResponse(data: unknown) {
@@ -79,38 +69,11 @@ export function handleOnMultiSelectClick(
     case "blend":
       actions.setBlend(String(value));
       break;
-    case "vegetarian":
-      actions.setVegetarian(Boolean(value));
-      break;
-    case "vegan":
-      actions.setVegan(Boolean(value));
-      break;
-    case "glutenfree":
-      actions.setGlutenFree(Boolean(value));
-      break;
-    case "lactosefree":
-      actions.setLactoseFree(Boolean(value));
-      break;
-    case "bio":
-      actions.setOrganic(Boolean(value));
-      break;
     case "method_of_protein_processing":
       actions.setProteinProcessingMethod(String(value));
       break;
     case "protein_sourcee":
       actions.setProteinSource(String(value));
-      break;
-    case "gmo_free":
-      actions.setNonGMO(Boolean(value));
-      break;
-    case "artificial_sweetener_free":
-      actions.setNoArtificialSweeteners(Boolean(value));
-      break;
-    case "plastic_packaging_free":
-      actions.setNoPlasticPackaging(Boolean(value));
-      break;
-    case "aspartame_free":
-      actions.setNoAspartame(Boolean(value));
       break;
     case "legal_category_of_product":
       actions.setLegalProductCategory(String(value));
@@ -118,10 +81,13 @@ export function handleOnMultiSelectClick(
     case "product_labels":
       actions.setProductLabels(String(value));
       break;
-    case "price":
-      actions.setPrice(Number(value));
-      break;
     default:
       break;
   }
+}
+
+export function isKeyOfSportNutritionState(
+  key: string
+): key is keyof SportNutritionState {
+  return key in INITIAL_FILTERS;
 }

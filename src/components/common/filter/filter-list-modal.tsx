@@ -16,10 +16,14 @@ import Spacer from "../spacer";
 import FilterMultiSelect from "./filter-multiselect";
 import { SportNutritionFilter } from "@/types/models";
 import { FC } from "react";
+import { SportNutritionState } from "@/hooks/use-filters";
+import { isKeyOfSportNutritionState } from "@/utils/sport-nutrition.utils";
+import Heading from "../heading";
 
 type Props = {
   selectedFilter: SportNutritionFilter;
   isOpen: boolean;
+  selectedFilters: SportNutritionState;
   onFilterLabelClick: (label: string) => void;
   onClose: () => void;
   onApplyFiltersClick: () => string;
@@ -29,10 +33,25 @@ const FilterListModal: FC<Props> = ({
   isOpen,
   onClose,
   selectedFilter,
+  selectedFilters,
   onApplyFiltersClick,
   onFilterLabelClick,
 }) => {
   const selectedFilterOptions = selectedFilter.options ?? [];
+  const selectedFilterCode = selectedFilter.code;
+  const canShowAllFilters =
+    isKeyOfSportNutritionState(selectedFilterCode) &&
+    selectedFilter != null &&
+    selectedFilterOptions.length >= 1;
+  const selectedFilterOptionsTuple = selectedFilterOptions
+    .map((option): [string, string] | null => {
+      if (typeof option.name === "string") {
+        return [option.value, option.name];
+      }
+
+      return null;
+    })
+    .filter(omitNullValue);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="md">
@@ -44,28 +63,23 @@ const FilterListModal: FC<Props> = ({
         </ModalHeader>
 
         <ModalBody>
+          {!isKeyOfSportNutritionState(selectedFilterCode) && (
+            <Center>
+              <Heading>
+                Sorry for any inconviniences. Currently we are not supporting
+                filter you are trying to use.
+              </Heading>
+            </Center>
+          )}
           {selectedFilterOptions.length === 0 && (
             <Center>No available options</Center>
           )}
           {selectedFilter == null && <Center>Unknown filter</Center>}
-          {selectedFilter != null && selectedFilterOptions.length >= 1 && (
+          {canShowAllFilters && (
             <FilterMultiSelect
               showAll
-              labels={selectedFilterOptions
-                .map((option): [string, string] | null => {
-                  if (typeof option.name === "string") {
-                    return [option.value, option.name];
-                  }
-
-                  return null;
-                })
-                .filter(omitNullValue)}
-              selectedFilters={
-                // this ts-ignore rule is helping us to be able dynamically access the stateAndActions object based on selected filter that is used as a key
-                // we are using same naming convention for the stateAndActions object keys and filter codes that are returned from the server
-                // @ts-ignore
-                stateAndActions[selectedFilter.code]
-              }
+              labels={selectedFilterOptionsTuple}
+              selectedFilters={selectedFilters[selectedFilterCode]}
               onClick={onFilterLabelClick}
             />
           )}

@@ -4,7 +4,10 @@ import * as t from "io-ts";
 import { PathReporter } from "io-ts/lib/PathReporter";
 import { SportNutritionFilter } from "@/types/models";
 import { SportNutritionState } from "@/hooks/use-filters";
-import { INITIAL_FILTERS } from "./sport-nutrition.utils";
+import {
+  INITIAL_FILTERS,
+  isKeyOfSportNutritionState,
+} from "./sport-nutrition.utils";
 
 export function classNames(...classes: (string | undefined)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -57,9 +60,10 @@ export function makeApiSearchQueryFromFilters(
   filtersState: SportNutritionState
 ): string {
   const query = filters.reduce((acc, filter) => {
-    // this ts-ignore rule is helping us to be able dynamically access the stateAndActions object based on selected filter that is used as a key
-    // we are using same naming convention for the stateAndActions object keys and filter codes that are returned from the server
-    // @ts-ignore
+    if (!isKeyOfSportNutritionState(filter.code)) {
+      return acc;
+    }
+
     const value = filtersState[filter.code];
 
     if (!value) {

@@ -17,20 +17,10 @@ export type SportNutritionState = {
   capsules: string[];
   form: string[];
   blend: string[];
-  vegetarian: boolean;
-  vegan: boolean;
-  glutenfree: boolean;
-  lactosefree: boolean;
-  bio: boolean;
   method_of_protein_processing: string[];
   protein_sourcee: string[];
-  gmo_free: boolean;
-  artificial_sweetener_free: boolean;
-  plastic_packaging_free: boolean;
-  aspartame_free: boolean;
   legal_category_of_product: string[];
   product_labels: string[];
-  price: number;
 };
 
 export type SportNutritionActions = {
@@ -45,20 +35,10 @@ export type SportNutritionActions = {
   setCapsules: (capsules: string) => void;
   setForm: (form: string) => void;
   setBlend: (blend: string) => void;
-  setVegetarian: (vegetarian: boolean) => void;
-  setVegan: (vegan: boolean) => void;
-  setGlutenFree: (glutenFree: boolean) => void;
-  setLactoseFree: (lactoseFree: boolean) => void;
-  setOrganic: (organic: boolean) => void;
   setProteinProcessingMethod: (proteinProcessingMethod: string) => void;
   setProteinSource: (proteinSource: string) => void;
-  setNonGMO: (nonGMO: boolean) => void;
-  setNoArtificialSweeteners: (noArtificialSweeteners: boolean) => void;
-  setNoPlasticPackaging: (noPlasticPackaging: boolean) => void;
   setLegalProductCategory: (legalProductCategory: string) => void;
   setProductLabels: (productLabels: string) => void;
-  setNoAspartame: (noAspartame: boolean) => void;
-  setPrice: (price: number) => void;
   clearFilters: () => void;
 };
 
@@ -291,18 +271,6 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           product_labels: [...state.product_labels, product_labels],
         };
       }),
-    setGlutenFree: (glutenfree) => set({ glutenfree }),
-    setLactoseFree: (lactosefree) => set({ lactosefree }),
-    setNoArtificialSweeteners: (artificial_sweetener_free) =>
-      set({ artificial_sweetener_free }),
-    setNoAspartame: (aspartame_free) => set({ aspartame_free }),
-    setNonGMO: (gmo_free) => set({ gmo_free }),
-    setNoPlasticPackaging: (plastic_packaging_free) =>
-      set({ plastic_packaging_free }),
-    setOrganic: (bio) => set({ bio }),
-    setPrice: (price) => set({ price }),
-    setVegan: (vegan) => set({ vegan }),
-    setVegetarian: (vegetarian) => set({ vegetarian }),
     clearFilters: () => set({ ...INITIAL_FILTERS }),
   }));
 
@@ -336,5 +304,41 @@ export function useFilters() {
 
   const result = useStore(store, (state) => ({ ...state }));
 
-  return result;
+  return {
+    state: {
+      default_category: result.default_category,
+      tea_package: result.tea_package,
+      manufacturer: result.manufacturer,
+      flavor: result.flavor,
+      mass_grams_g: result.mass_grams_g,
+      mass_mililiter_ml: result.mass_mililiter_ml,
+      tablets: result.tablets,
+      colors: result.colors,
+      capsules: result.capsules,
+      form: result.form,
+      blend: result.blend,
+      method_of_protein_processing: result.method_of_protein_processing,
+      protein_sourcee: result.protein_sourcee,
+      legal_category_of_product: result.legal_category_of_product,
+      product_labels: result.product_labels,
+    },
+    actions: {
+      setMainCategory: result.setMainCategory,
+      setPackagingTeas: result.setPackagingTeas,
+      setBrand: result.setBrand,
+      setFlavor: result.setFlavor,
+      setPackagingG: result.setPackagingG,
+      setPackagingMl: result.setPackagingMl,
+      setTablets: result.setTablets,
+      setColor: result.setColor,
+      setCapsules: result.setCapsules,
+      setForm: result.setForm,
+      setBlend: result.setBlend,
+      setProteinProcessingMethod: result.setProteinProcessingMethod,
+      setProteinSource: result.setProteinSource,
+      setLegalProductCategory: result.setLegalProductCategory,
+      setProductLabels: result.setProductLabels,
+      clearFilters: result.clearFilters,
+    },
+  };
 }
