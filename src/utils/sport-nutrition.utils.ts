@@ -3,7 +3,38 @@ import {
   SportNutritionListResponse,
 } from "@/types/models";
 import { extractResult } from "./utils";
-import { SportNutritionActions } from "@/hooks/use-filters";
+import {
+  SportNutritionActions,
+  SportNutritionState,
+} from "@/hooks/use-filters";
+
+export const INITIAL_FILTERS: SportNutritionState = {
+  default_category: [],
+  tea_package: [],
+  manufacturer: [],
+  flavor: [],
+  mass_grams_g: [],
+  mass_mililiter_ml: [],
+  tablets: [],
+  colors: [],
+  capsules: [],
+  form: [],
+  blend: [],
+  vegetarian: false,
+  vegan: false,
+  glutenfree: false,
+  lactosefree: false,
+  bio: false,
+  method_of_protein_processing: [],
+  protein_sourcee: [],
+  gmo_free: false,
+  artificial_sweetener_free: false,
+  plastic_packaging_free: false,
+  aspartame_free: false,
+  legal_category_of_product: [],
+  product_labels: [],
+  price: 0,
+};
 
 export function decodeSportNutritionListResponse(data: unknown) {
   return extractResult(SportNutritionListResponse.decode(data));
@@ -12,7 +43,7 @@ export function decodeSportNutritionListResponse(data: unknown) {
 export function handleOnMultiSelectClick(
   filter: SportNutritionFilter,
   actions: SportNutritionActions,
-  value: string | boolean | number,
+  value: string | boolean | number
 ) {
   switch (filter.code) {
     case "default_category":

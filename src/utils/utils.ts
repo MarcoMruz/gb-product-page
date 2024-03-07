@@ -4,34 +4,7 @@ import * as t from "io-ts";
 import { PathReporter } from "io-ts/lib/PathReporter";
 import { SportNutritionFilter } from "@/types/models";
 import { SportNutritionState } from "@/hooks/use-filters";
-
-export const INITIAL_FILTERS: SportNutritionState = {
-  default_category: [],
-  tea_package: [],
-  manufacturer: [],
-  flavor: [],
-  mass_grams_g: [],
-  mass_mililiter_ml: [],
-  tablets: [],
-  colors: [],
-  capsules: [],
-  form: [],
-  blend: [],
-  vegetarian: false,
-  vegan: false,
-  glutenfree: false,
-  lactosefree: false,
-  bio: false,
-  method_of_protein_processing: [],
-  protein_sourcee: [],
-  gmo_free: false,
-  artificial_sweetener_free: false,
-  plastic_packaging_free: false,
-  aspartame_free: false,
-  legal_category_of_product: [],
-  product_labels: [],
-  price: 0,
-};
+import { INITIAL_FILTERS } from "./sport-nutrition.utils";
 
 export function classNames(...classes: (string | undefined)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -44,7 +17,7 @@ export const findElement =
 
 export const childrenElements = (children: React.ReactNode) =>
   React.Children.map(children, (child) =>
-    React.isValidElement(child) ? React.cloneElement(child) : null,
+    React.isValidElement(child) ? React.cloneElement(child) : null
   );
 
 export function optional<T, U>(type: t.Type<T, U>) {
@@ -57,7 +30,7 @@ export function extractResult<A>(result: Either<t.Errors, A>): A {
       const errorMessages = PathReporter.report(result);
       throw new Error(`BAD_REQUEST: ${errorMessages.join(",")}`);
     },
-    (data: A) => data,
+    (data: A) => data
   )(result);
 }
 
@@ -68,7 +41,7 @@ export const getRatingFromNumber = (rating: number): 0 | 1 | 2 | 3 | 4 | 5 => {
 };
 
 export const makeStarsFromPercentage = (
-  percentage: number,
+  percentage: number
 ): 0 | 1 | 2 | 3 | 4 | 5 => {
   const rating = percentage / 20;
 
@@ -81,7 +54,7 @@ export function omitNullValue<T extends any>(item?: T | null): item is T {
 
 export function makeApiSearchQueryFromFilters(
   filters: SportNutritionFilter[],
-  filtersState: SportNutritionState,
+  filtersState: SportNutritionState
 ): string {
   const query = filters.reduce((acc, filter) => {
     // @ts-ignore
@@ -112,13 +85,12 @@ export function makeApiSearchQueryFromFilters(
 }
 
 export function convertSearchParamsToFilters(
-  params: URLSearchParams,
+  params: URLSearchParams
 ): SportNutritionState {
   const paramsObj: any = {
     ...INITIAL_FILTERS,
     ...Object.fromEntries(params.entries()),
   };
-
   return Object.keys(paramsObj).reduce((acc, key) => {
     if (Array.isArray(paramsObj[key])) {
       return {
@@ -130,7 +102,7 @@ export function convertSearchParamsToFilters(
     if (typeof paramsObj[key] === "string") {
       return {
         ...acc,
-        [key]: [paramsObj[key]],
+        [key]: [...paramsObj[key].split(",")],
       };
     }
 

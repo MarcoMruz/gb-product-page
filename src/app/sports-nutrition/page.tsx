@@ -31,7 +31,7 @@ async function loadProducts(searchParams: Record<string, any>) {
       headers: {
         "Content-Type": "application/json",
       },
-    },
+    }
   );
 
   if (!response.ok || response.json == null) {

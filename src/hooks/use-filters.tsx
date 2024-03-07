@@ -1,6 +1,6 @@
 "use client";
 
-import { INITIAL_FILTERS } from "@/utils/utils";
+import { INITIAL_FILTERS } from "@/utils/sport-nutrition.utils";
 import { createContext, useContext, useRef } from "react";
 import { useStore } from "zustand";
 import { createStore } from "zustand";
@@ -71,7 +71,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             default_category: state.default_category.filter(
-              (item) => item !== default_category,
+              (item) => item !== default_category
             ),
           };
         }
@@ -86,7 +86,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             tea_package: state.tea_package.filter(
-              (item) => item !== tea_package,
+              (item) => item !== tea_package
             ),
           };
         }
@@ -101,7 +101,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             manufacturer: state.manufacturer.filter(
-              (item) => item !== manufacturer,
+              (item) => item !== manufacturer
             ),
           };
         }
@@ -129,7 +129,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             mass_grams_g: state.mass_grams_g.filter(
-              (item) => item !== mass_grams_g,
+              (item) => item !== mass_grams_g
             ),
           };
         }
@@ -144,7 +144,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             mass_mililiter_ml: state.mass_mililiter_ml.filter(
-              (item) => item !== mass_mililiter_ml,
+              (item) => item !== mass_mililiter_ml
             ),
           };
         }
@@ -222,14 +222,14 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
       set((state) => {
         if (
           state.method_of_protein_processing.includes(
-            method_of_protein_processing,
+            method_of_protein_processing
           )
         ) {
           return {
             ...state,
             method_of_protein_processing:
               state.method_of_protein_processing.filter(
-                (item) => item !== method_of_protein_processing,
+                (item) => item !== method_of_protein_processing
               ),
           };
         }
@@ -247,7 +247,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             protein_sourcee: state.protein_sourcee.filter(
-              (item) => item !== protein_source,
+              (item) => item !== protein_source
             ),
           };
         }
@@ -264,7 +264,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             legal_category_of_product: state.legal_category_of_product.filter(
-              (item) => item !== legal_category_of_product,
+              (item) => item !== legal_category_of_product
             ),
           };
         }
@@ -282,7 +282,7 @@ const createFilterStore = (init: SportNutritionState = INITIAL_FILTERS) =>
           return {
             ...state,
             product_labels: state.product_labels.filter(
-              (item) => item !== product_labels,
+              (item) => item !== product_labels
             ),
           };
         }

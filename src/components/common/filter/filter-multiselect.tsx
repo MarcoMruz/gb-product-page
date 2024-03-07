@@ -9,50 +9,41 @@ type MultiSelectProps = {
   showAll?: boolean;
 };
 
-type RangeProps = {
-  max: number;
-  min: number;
-  value: number;
-  onChange: (value: number) => void;
-};
-
-type CheckboxProps = {
-  label: string;
-  isChecked: boolean;
-  onClick: () => void;
-};
-
 const FilterMultiSelect: FC<MultiSelectProps> = ({
   labels,
   selectedFilters,
   onClick,
   showAll = false,
 }) => {
+  const showedLabels = labels.slice(0, showAll ? labels.length : 5);
+  const showedLabelsWithSelectedOnes = showedLabels.concat(
+    labels
+      .map((label): [string, string] | null => {
+        const isInShowed =
+          showedLabels.findIndex((l) => l[0] === label[0]) >= 0;
+        const isSelected = selectedFilters.includes(label[0]);
+
+        if (!isInShowed && isSelected && !showAll) {
+          return label;
+        }
+
+        return null;
+      })
+      .filter(omitNullValue)
+  );
+
   return (
     <div>
-      {labels
-        .slice(0, showAll ? labels.length : 5)
-        .concat(
-          labels
-            .map((label): [string, string] | null => {
-              if (selectedFilters.includes(label[0]) && !showAll) {
-                return label;
-              }
-
-              return null;
-            })
-            .filter(omitNullValue)
-        )
-        .map((label) => (
-          <Tag
-            key={label[0]}
-            isSelected={selectedFilters.includes(label[0])}
-            onClick={() => onClick(label[0])}
-            className="mx-2 cursor-pointer"
-          >
-            {label[1]}
-          </Tag>
-        ))}
+      {showedLabelsWithSelectedOnes.map((label) => (
+        <Tag
+          key={label[0]}
+          isSelected={selectedFilters.includes(label[0])}
+          onClick={() => onClick(label[0])}
+          className="mx-2 cursor-pointer"
+        >
+          {label[1]}
+        </Tag>
+      ))}
     </div>
   );
 };
