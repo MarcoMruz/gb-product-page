@@ -1,8 +1,5 @@
 import { FC } from "react";
 import { Tag } from "../tag";
-import { HStack } from "../h-stack";
-import { Input } from "../input";
-import { Spacer } from "../spacer";
 import { omitNullValue } from "@/utils/utils";
 
 type MultiSelectProps = {
@@ -39,12 +36,12 @@ const FilterMultiSelect: FC<MultiSelectProps> = ({
           labels
             .map((label): [string, string] | null => {
               if (selectedFilters.includes(label[0]) && !showAll) {
-                return [label[0], label[1]];
+                return label;
               }
 
               return null;
             })
-            .filter(omitNullValue),
+            .filter(omitNullValue)
         )
         .map((label) => (
           <Tag
@@ -60,38 +57,4 @@ const FilterMultiSelect: FC<MultiSelectProps> = ({
   );
 };
 
-const FilterCheckbox: FC<CheckboxProps> = ({ label, onClick, isChecked }) => {
-  return (
-    <HStack onClick={onClick} spacing={2}>
-      <input type="checkbox" className="form-checkbox" checked={isChecked} />
-      <span>{label}</span>
-    </HStack>
-  );
-};
-
-const FilterRange: FC<RangeProps> = ({ min, max, value, onChange }) => {
-  const handleOnMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(parseInt(e.target.value));
-  };
-
-  return (
-    <>
-      <label htmlFor="price-range">Price Range: ({value})</label>
-      <Input
-        id="price-range"
-        type="range"
-        min={min}
-        max={max}
-        value={value}
-        onChange={handleOnMinChange}
-      />
-      <HStack spacing={2} className="w-full">
-        <span>{min}</span>
-        <Spacer />
-        <span>{max}</span>
-      </HStack>
-    </>
-  );
-};
-
-export { FilterMultiSelect, FilterCheckbox, FilterRange };
+export default FilterMultiSelect;

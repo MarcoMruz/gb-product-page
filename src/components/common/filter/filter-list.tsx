@@ -3,12 +3,8 @@
 import { SportNutritionFilter } from "@/types/models";
 import { FC, Fragment, useCallback, useState } from "react";
 import { VStack } from "../v-stack";
-import { FilterMultiSelect } from "./filter-label";
-import {
-  INITIAL_FILTERS,
-  makeApiSearchQueryFromFilters,
-  omitNullValue,
-} from "@/utils/utils";
+import FilterMultiSelect from "./filter-multiselect";
+import { makeApiSearchQueryFromFilters, omitNullValue } from "@/utils/utils";
 import { HStack } from "../h-stack";
 import { Text } from "../text";
 import Button from "../button";
@@ -37,7 +33,7 @@ const FilterList: FC<Props> = ({ filters, className }) => {
   const [canShowFilters, setCanShowFilters] = useState(false);
   const { close, isOpen, open } = useDisclosure();
   const [selectedFilterLabel, setSelectedFilterLabel] = useState<string | null>(
-    null,
+    null
   );
 
   const handleOnApplyFiltersClick = useCallback(() => {
@@ -55,15 +51,10 @@ const FilterList: FC<Props> = ({ filters, className }) => {
       })
       .filter(omitNullValue);
 
-  const selectedFilterName = filters.find(
-    (filter) => filter.code === selectedFilterLabel,
-  )?.name;
-  const selectedFilterOptions =
-    filters.find((filter) => filter.code === selectedFilterLabel)?.options ??
-    [];
   const selectedFilter = filters.find(
-    (filter) => filter.code === selectedFilterLabel,
+    (filter) => filter.code === selectedFilterLabel
   );
+  const selectedFilterOptions = selectedFilter?.options ?? [];
 
   return (
     <>
@@ -72,7 +63,7 @@ const FilterList: FC<Props> = ({ filters, className }) => {
 
         <ModalContent>
           <ModalHeader>
-            <Text>{selectedFilterName ?? "Unknown filter"}</Text>
+            <Text>{selectedFilter?.name ?? "Unknown filter"}</Text>
           </ModalHeader>
 
           <ModalBody>
@@ -100,7 +91,7 @@ const FilterList: FC<Props> = ({ filters, className }) => {
                   handleOnMultiSelectClick(
                     selectedFilter,
                     stateAndActions,
-                    value,
+                    value
                   );
                 }}
               />
