@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Name README
 
-## Getting Started
+This README will guide you through the installation process, setting up the development environment, and building the project for production.
 
-First, run the development server:
+## Installation
+
+To get started, make sure you have Node.js installed on your machine. The project requires Node.js version 18.0.0 or later.
+
+1. Clone the repository to your local machine:
+
+```bash
+git clone https://github.com/MarcoMruz/gb-product-page.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd gb-product-page
+```
+
+3. Install dependencies using npm:
+
+```bash
+npm install
+```
+
+## Development Environment
+
+To run the project in the development environment, use the following command:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This command will start a local development server and open the project in your default web browser. Any changes you make to the source code will automatically trigger hot-reloading for instant feedback.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+We are not using any specific secrets, so you do not to create .env file to be able to run project.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Building for Production
 
-## Learn More
+To build the project for production, execute the following command:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This command will generate a production-ready build of the project, optimized for performance and ready for deployment.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Global State Management: Zustand
 
-## Deploy on Vercel
+This project utilizes Zustand for global state management. Zustand is a small, fast, and reactive state management library for React applications. It provides a simple and efficient way to manage application state, making it easier to share state across components.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In this project we used Zustand because of the size of the project and our specific needs are fulfilled by this small library. If you would like to learn more about its abilities, or to see docs when implementing see documentation for Zustand [here](https://docs.pmnd.rs/zustand/getting-started/introduction)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Type Safety with io-ts and fp-ts
+
+To ensure type safety and better handling of server responses, we use io-ts and fp-ts libraries.
+
+- **io-ts**: io-ts is a library for runtime type checking and decoding. It allows us to define TypeScript types for our data structures and automatically validate and decode data received from the server.
+
+- **fp-ts**: fp-ts is a functional programming library for TypeScript. It provides a set of composable and immutable data types and functions, allowing us to write type-safe and expressive code.
+
+We use these libraries and its functionalities in specific folder structure models are in [src/types/models.ts](src/types/models.ts) and functions, that handle decoding of server responses are in [src/utils/<model-name.utils.ts>](src/utils/sport-nutrition.utils.ts)
+
+## TypeScript
+
+This project is written in TypeScript, a statically typed superset of JavaScript. TypeScript helps catch errors and provides better tooling support for code refactoring, ensuring a more robust and maintainable codebase.
+
+By using TypeScript, you can catch type-related errors during development, reducing the likelihood of bugs in the production code.
